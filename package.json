@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently -k -n WEB,AI -c \"cyan.bold,magenta.bold\" \"npm:dev:web\" \"npm:dev:ai\"",
+    "dev:web": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$webPids = Get-NetTCPConnection -LocalPort 3000,3001 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique; foreach ($procId in $webPids) { Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue }; if (Test-Path '.next/dev/lock') { Remove-Item '.next/dev/lock' -Force -ErrorAction SilentlyContinue }; & node_modules/.bin/next dev --webpack\"",
+    "dev:ai": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:HF_HUB_DISABLE_SYMLINKS_WARNING='1'; $env:TRANSFORMERS_NO_ADVISORY_WARNINGS='1'; $env:ENABLE_FASHIONCLIP='1'; $env:REQUIRE_PRETRAINED='1'; $stale = Get-CimInstance Win32_Process -Filter \\\"name = 'python.exe'\\\" | Where-Object { $_.CommandLine -like '*uvicorn app.main:app*' -or $_.CommandLine -like '*ai-service*uvicorn*' } | Select-Object -ExpandProperty ProcessId -Unique; foreach ($procId in $stale) { Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue }; $existing = Get-NetTCPConnection -LocalPort 8010 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique; foreach ($procId in $existing) { Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue }; if (!(Test-Path 'ai-service/.venv/Scripts/python.exe')) { python -m venv ai-service/.venv; & ai-service/.venv/Scripts/python.exe -m pip install -r ai-service/requirements.txt }; & ai-service/.venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8010 --app-dir ai-service\"",
+    "ai:install": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:HF_HUB_DISABLE_SYMLINKS_WARNING='1'; if (!(Test-Path 'ai-service/.venv/Scripts/python.exe')) { python -m venv ai-service/.venv }; & ai-service/.venv/Scripts/python.exe -m pip install -r ai-service/requirements.txt\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -19,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",

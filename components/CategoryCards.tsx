@@ -12,9 +12,10 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=900&q=80')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/jacket.svg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
+					backgroundColor: "#31211a",
 				}}
 				>
 				<div className="absolute bottom-0 w-full p-6 text-white">
@@ -28,9 +29,10 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/shirt.svg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
+					backgroundColor: "#2f2018",
 				}}
 				>
 				<div className="absolute bottom-0 w-full p-6 text-white">
@@ -44,9 +46,10 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&w=900&q=80')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/dress.svg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
+					backgroundColor: "#3b251b",
 				}}
 				>
 				<div className="absolute bottom-0 w-full p-6 text-white">

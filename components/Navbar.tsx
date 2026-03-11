@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-	{ href: "#home", label: "Home" },
-	{ href: "#collections", label: "Collections" },
-	{ href: "#carousel", label: "Carousel" },
-	{ href: "#reviews", label: "Reviews" },
-	{ href: "#contact", label: "Contact" },
+	{ href: "/", label: "Home" },
+	{ href: "/collections", label: "Collections" },
+	{ href: "/ai-cloth-suggestion", label: "AI Suggestion" },
+	{ href: "/reviews", label: "Reviews" },
+	{ href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -21,9 +21,9 @@ export default function Navbar() {
 		<nav className="sticky top-0 z-40 border-b border-white/60 bg-[#f8f3ea]/85 px-5 py-4 backdrop-blur-lg md:px-10">
 			<div className="mx-auto flex w-full max-w-6xl items-center justify-between">
 				<div>
-					<p className="text-xs uppercase tracking-[0.32em] text-[#8a5a33]">Curated Style</p>
+					<p className="text-xs uppercase tracking-[0.32em] text-[#8a5a33]">Shree Ram</p>
 					<h1 className="display-font text-2xl leading-none text-[#26150f] md:text-3xl">
-						Maison Thread
+						Readymade Showroom
 					</h1>
 				</div>
 

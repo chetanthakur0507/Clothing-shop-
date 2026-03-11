@@ -1,16 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 type StaggerGridProps = {
 	children: ReactNode;
 	className?: string;
-};
+} & Omit<ComponentProps<typeof motion.div>, "children">;
 
-export function StaggerContainer({ children, className }: StaggerGridProps) {
+export function StaggerContainer({ children, className, ...props }: StaggerGridProps) {
 	return (
 		<motion.div
+			{...props}
 			initial="hidden"
 			whileInView="show"
 			viewport={{ once: true, amount: 0.15 }}
@@ -27,9 +28,10 @@ export function StaggerContainer({ children, className }: StaggerGridProps) {
 	);
 }
 
-export function StaggerItem({ children, className }: StaggerGridProps) {
+export function StaggerItem({ children, className, ...props }: StaggerGridProps) {
 	return (
 		<motion.div
+			{...props}
 			variants={{
 				hidden: { opacity: 0, y: 24 },
 				show: { opacity: 1, y: 0 },

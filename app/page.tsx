@@ -10,13 +10,14 @@ import LookbookStrip from "@/components/LookbookStrip";
 import Navbar from "@/components/Navbar";
 import NewsletterSection from "@/components/NewsletterSection";
 import ParallaxShowcase from "@/components/ParallaxShowcase";
-import ProductCarousel from "@/components/ProductCarousel";
+import ProductGallery from "@/components/ProductGallery";
 import ProductSection from "@/components/ProductSection";
 import ServiceHighlights from "@/components/ServiceHighlights";
 import SeasonBanner from "@/components/SeasonBanner";
 import StyleJourney from "@/components/StyleJourney";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import VisitStoreSection from "@/components/VisitStoreSection";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
 	return (
@@ -31,15 +32,16 @@ export default function Home() {
 			<LookbookStrip />
 			<StyleJourney />
 			<ParallaxShowcase />
-			<ProductCarousel />
 			<DealOfWeek />
 			<ProductSection />
+			<ProductGallery />
 			<SeasonBanner />
 			<TestimonialsSection />
 			<NewsletterSection />
 			<FaqSection />
 			<VisitStoreSection />
 			<Footer />
+			<WhatsAppButton />
 		</main>
 	);
 }
