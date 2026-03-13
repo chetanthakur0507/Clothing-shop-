@@ -12,7 +12,7 @@ export default function BrandStats() {
 	return (
 		<ScrollReveal className="mx-auto w-full max-w-6xl px-4 py-10 md:px-8">
 			<div className="soft-border glass-panel rounded-3xl px-6 py-8 md:px-10">
-				<p className="text-xs uppercase tracking-[0.24em] text-[#8e6344]">At An Glance</p>
+				<p className="text-xs uppercase tracking-[0.24em] text-[#8e6344]">At A Glance</p>
 				<StaggerContainer className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
 					{stats.map((stat) => (
 						<StaggerItem
