@@ -8,6 +8,36 @@ type HealthResponse = {
 	error?: string | null;
 };
 
+export class AIServiceError extends Error {
+	status: number;
+	rawBody?: string;
+
+	constructor(message: string, status: number, rawBody?: string) {
+		super(message);
+		this.name = "AIServiceError";
+		this.status = status;
+		this.rawBody = rawBody;
+	}
+}
+
+function toMessageFromBody(body: string, status: number): string {
+	if (!body) {
+		return `Python service request failed (${status})`;
+	}
+
+	try {
+		const parsed = JSON.parse(body) as { detail?: unknown; error?: unknown; message?: unknown };
+		if (typeof parsed.detail === "string") return parsed.detail;
+		if (Array.isArray(parsed.detail)) return parsed.detail.join(", ");
+		if (typeof parsed.error === "string") return parsed.error;
+		if (typeof parsed.message === "string") return parsed.message;
+	} catch {
+		// Keep raw body fallback when response is plain text/non-JSON.
+	}
+
+	return body;
+}
+
 function withTimeoutSignal() {
 	const controller = new AbortController();
 	const timeout = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
@@ -61,11 +91,12 @@ export async function callPythonJson<T>(path: string, payload: unknown): Promise
 			});
 		} catch (error) {
 			if (error instanceof DOMException && error.name === "AbortError") {
-				throw new Error(
+				throw new AIServiceError(
 					`AI service response timed out after ${Math.round(AI_TIMEOUT_MS / 1000)}s. Please try again.`,
+					504,
 				);
 			}
-			throw new Error("AI service se connection nahi ho paaya. Service running check karein.");
+			throw new AIServiceError("AI service se connection nahi ho paaya. Service running check karein.", 503);
 		}
 	} finally {
 		clearTimeout(timeout);
@@ -73,7 +104,7 @@ export async function callPythonJson<T>(path: string, payload: unknown): Promise
 
 	if (!response.ok) {
 		const text = await response.text();
-		throw new Error(text || `Python service request failed (${response.status})`);
+		throw new AIServiceError(toMessageFromBody(text, response.status), response.status, text);
 	}
 
 	return (await response.json()) as T;
@@ -99,11 +130,12 @@ export async function callPythonMultipart<T>(
 			});
 		} catch (error) {
 			if (error instanceof DOMException && error.name === "AbortError") {
-				throw new Error(
+				throw new AIServiceError(
 					`AI service response timed out after ${Math.round(AI_TIMEOUT_MS / 1000)}s. Please try again.`,
+					504,
 				);
 			}
-			throw new Error("AI service se connection nahi ho paaya. Service running check karein.");
+			throw new AIServiceError("AI service se connection nahi ho paaya. Service running check karein.", 503);
 		}
 	} finally {
 		clearTimeout(timeout);
@@ -111,7 +143,7 @@ export async function callPythonMultipart<T>(
 
 	if (!response.ok) {
 		const text = await response.text();
-		throw new Error(text || `Python service request failed (${response.status})`);
+		throw new AIServiceError(toMessageFromBody(text, response.status), response.status, text);
 	}
 
 	return (await response.json()) as T;

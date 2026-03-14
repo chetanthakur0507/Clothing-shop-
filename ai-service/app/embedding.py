@@ -28,7 +28,7 @@ class EmbeddingEngine:
         try:
             from transformers import CLIPModel, CLIPProcessor
 
-            self.processor = CLIPProcessor.from_pretrained(model_name)
+            self.processor = CLIPProcessor.from_pretrained(model_name, use_fast=True)
             self.model = CLIPModel.from_pretrained(model_name)
             self.mode = "clip"
             self.dim = int(self.model.config.projection_dim)
