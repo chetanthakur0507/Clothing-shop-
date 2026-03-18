@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 import { useRef } from "react";
 
 export default function HeroSection() {
@@ -51,18 +52,18 @@ export default function HeroSection() {
 						women. A modern showroom experience inspired by editorial fashion sets.
 					</p>
 					<div className="reveal-up-delay mt-7 flex flex-wrap gap-3">
-						<button
-							type="button"
+						<Link
+							href="/collections"
 							className="rounded-full bg-[#d7a13f] px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-[#24160d] transition duration-300 hover:-translate-y-0.5 hover:bg-[#e1b158]"
 						>
 							Shop New Drop
-						</button>
-						<button
-							type="button"
+						</Link>
+						<Link
+							href="/lookbook"
 							className="rounded-full border border-white/70 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition duration-300 hover:-translate-y-0.5"
 						>
 							View Lookbook
-						</button>
+						</Link>
 					</div>
 				</div>
 			</motion.div>
