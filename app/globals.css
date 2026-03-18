@@ -7,6 +7,8 @@
   --brand: #c7492b;
   --brand-deep: #7f2f23;
   --gold: #d7a13f;
+  --font-dm-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-playfair: Georgia, "Times New Roman", serif;
 }
 
 @theme inline {

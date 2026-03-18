@@ -6,6 +6,9 @@ const envOrigins = (process.env.NEXT_ALLOWED_DEV_ORIGINS ?? "")
 	.filter(Boolean);
 
 const nextConfig: NextConfig = {
+	turbopack: {
+		root: process.cwd(),
+	},
 	allowedDevOrigins: [
 		"http://localhost:3000",
 		"http://127.0.0.1:3000",
