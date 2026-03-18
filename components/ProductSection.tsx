@@ -2,14 +2,14 @@ import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import { StaggerContainer, StaggerItem } from "@/components/StaggerGrid";
 
-const WA_NUMBER = "919876543210";
+const WA_NUMBER = "918076210068";
 
 const products = [
 	{
 		name: "Textured Overshirt",
 		price: "Rs. 1,899",
 		image:
-			"https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=800&q=80",
+			"https://images.unsplash.com/photo-1646723774959-7ff2f39b252f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNsb3RoaW5nJTIwYmFnZ3klMjBsb2trfGVufDB8fDB8fHww",
 	},
 	{
 		name: "Classic Denim Jacket",

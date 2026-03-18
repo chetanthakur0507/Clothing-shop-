@@ -11,7 +11,11 @@ export async function POST(request: Request) {
 			return NextResponse.json({ error: "image is required" }, { status: 400 });
 		}
 
-		const result = await callPythonMultipart<RecommendationResponse>("/predict/image", "image", image);
+		const result = await callPythonMultipart<RecommendationResponse>(
+			"/predict/image",
+			"image",
+			image,
+		);
 		return NextResponse.json(result);
 	} catch (error) {
 		const status = error instanceof AIServiceError ? error.status : 502;

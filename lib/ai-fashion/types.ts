@@ -11,4 +11,5 @@ export type RecommendationResponse = {
 	styleSuggestions: string[];
 	previewImageUrl: string;
 	nextStep: string;
+	provider?: "python" | "grok-fallback";
 };

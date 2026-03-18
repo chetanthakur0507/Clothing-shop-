@@ -55,16 +55,39 @@ class HybridOutfitMatcher:
                 break
         return picked
 
+    def _build_mannequin_preview_prompt(
+        self,
+        anchor_text: str,
+        items: list[dict],
+        color_suggestions: list[str],
+        style_suggestions: list[str],
+    ) -> str:
+        item_names = ", ".join(i["name"] for i in items) if items else "coordinated outfit pieces"
+        colors = ", ".join(color_suggestions[:3]) if color_suggestions else "neutral palette"
+        styles = ", ".join(style_suggestions[:2]) if style_suggestions else "smart casual"
+        return (
+            "Studio fashion ecommerce photoshoot of a full-body mannequin (dummy model) wearing the exact outfit. "
+            f"Anchor item: {anchor_text}. Outfit pieces: {item_names}. "
+            f"Color palette: {colors}. Style: {styles}. "
+            "Front-facing mannequin, clean seamless background, realistic fabric texture, no real person, no face."
+        )
+
     def from_item(self, item_text: str) -> dict:
         vec = self.embedder.embed_text(item_text)
         candidates = self.index.search(vec, k=8)
         rules = self._rules_for_item(item_text)
-        prompt = f"Fashion outfit flat-lay photo: {item_text}, with matching items"
-        preview = generate_outfit_preview(prompt)
+        response_items = self._to_response_items(candidates)
+        preview_prompt = self._build_mannequin_preview_prompt(
+            anchor_text=item_text,
+            items=response_items,
+            color_suggestions=rules["colorSuggestions"],
+            style_suggestions=rules["styleSuggestions"],
+        )
+        preview = generate_outfit_preview(preview_prompt)
 
         return {
             "inputSummary": f"Selected item: {item_text}",
-            "recommendedItems": self._to_response_items(candidates),
+            "recommendedItems": response_items,
             "colorSuggestions": rules["colorSuggestions"],
             "styleSuggestions": rules["styleSuggestions"],
             "previewImageUrl": preview,
@@ -76,11 +99,18 @@ class HybridOutfitMatcher:
         candidates = self.index.search(vec, k=8)
         guess = "uploaded clothing item"
         rules = self._rules_for_item(filename)
-        preview = generate_outfit_preview(f"Outfit suggestion for image file {filename}")
+        response_items = self._to_response_items(candidates)
+        preview_prompt = self._build_mannequin_preview_prompt(
+            anchor_text=f"uploaded clothing from {filename}",
+            items=response_items,
+            color_suggestions=rules["colorSuggestions"],
+            style_suggestions=rules["styleSuggestions"],
+        )
+        preview = generate_outfit_preview(preview_prompt)
 
         return {
             "inputSummary": f"Image analyzed: {filename} (detected as {guess})",
-            "recommendedItems": self._to_response_items(candidates),
+            "recommendedItems": response_items,
             "colorSuggestions": rules["colorSuggestions"],
             "styleSuggestions": rules["styleSuggestions"],
             "previewImageUrl": preview,
@@ -90,15 +120,22 @@ class HybridOutfitMatcher:
     def from_user_photo(self, image: Image.Image, filename: str) -> dict:
         vec = self.embedder.embed_image(image)
         candidates = self.index.search(vec, k=8)
-        preview = generate_outfit_preview(
-            f"Virtual try-on style preview for user portrait {filename} with modern smart casual outfit"
+        color_suggestions = ["Navy", "Beige", "White", "Olive"]
+        style_suggestions = ["Smart Casual", "Urban Minimal", "Weekend Formal"]
+        response_items = self._to_response_items(candidates)
+        preview_prompt = self._build_mannequin_preview_prompt(
+            anchor_text=f"style profile inspired by user photo {filename}",
+            items=response_items,
+            color_suggestions=color_suggestions,
+            style_suggestions=style_suggestions,
         )
+        preview = generate_outfit_preview(preview_prompt)
 
         return {
             "inputSummary": f"User photo uploaded: {filename}",
-            "recommendedItems": self._to_response_items(candidates),
-            "colorSuggestions": ["Navy", "Beige", "White", "Olive"],
-            "styleSuggestions": ["Smart Casual", "Urban Minimal", "Weekend Formal"],
+            "recommendedItems": response_items,
+            "colorSuggestions": color_suggestions,
+            "styleSuggestions": style_suggestions,
             "previewImageUrl": preview,
             "nextStep": "Integrate person segmentation + virtual try-on model for body-aware previews.",
         }

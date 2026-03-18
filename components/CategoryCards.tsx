@@ -12,7 +12,7 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/jacket.svg')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/jacket.jpg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 					backgroundColor: "#31211a",
@@ -29,7 +29,7 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/shirt.svg')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/shirt.jpg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 					backgroundColor: "#2f2018",
@@ -46,7 +46,7 @@ export default function CategoryCards() {
 				className="group relative min-h-64 overflow-hidden rounded-3xl"
 				style={{
 					backgroundImage:
-						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/dress.svg')",
+						"linear-gradient(145deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('/dress.jpg')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 					backgroundColor: "#3b251b",

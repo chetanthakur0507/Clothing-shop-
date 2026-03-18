@@ -18,6 +18,7 @@ import StyleJourney from "@/components/StyleJourney";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import VisitStoreSection from "@/components/VisitStoreSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ProductCarousel from "@/components/ProductCarousel";
 
 export default function Home() {
 	return (
@@ -37,6 +38,7 @@ export default function Home() {
 			<ProductGallery />
 			<SeasonBanner />
 			<TestimonialsSection />
+			<ProductCarousel />
 			<NewsletterSection />
 			<FaqSection />
 			<VisitStoreSection />

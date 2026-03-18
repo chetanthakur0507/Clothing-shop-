@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -20,12 +21,22 @@ export default function Navbar() {
 	return (
 		<nav className="sticky top-0 z-40 border-b border-white/60 bg-[#f8f3ea]/85 px-5 py-4 backdrop-blur-lg md:px-10">
 			<div className="mx-auto flex w-full max-w-6xl items-center justify-between">
-				<div>
-					<p className="text-xs uppercase tracking-[0.32em] text-[#8a5a33]">Shree Ram</p>
-					<h1 className="display-font text-2xl leading-none text-[#26150f] md:text-3xl">
-						Readymade Showroom
-					</h1>
-				</div>
+				<Link href="/" className="flex items-center gap-3">
+					<Image
+						src="/logo-shree-ram.png"
+						alt="Shree Ram Logo"
+						width={56}
+						height={56}
+						priority
+						className="h-12 w-12 rounded-full border border-[#d9c3ab] object-cover md:h-14 md:w-14"
+					/>
+					<div>
+						<p className="text-xs uppercase tracking-[0.32em] text-[#8a5a33]">Shree Ram</p>
+						<h1 className="display-font text-xl leading-none text-[#26150f] md:text-2xl">
+							Readymade Showroom
+						</h1>
+					</div>
+				</Link>
 
 				<div className="hidden gap-8 text-sm font-semibold uppercase tracking-[0.16em] text-[#47352e] md:flex">
 					{navLinks.map((item) => (
@@ -35,20 +46,6 @@ export default function Navbar() {
 					))}
 				</div>
 
-				<div className="hidden items-center gap-2 md:flex">
-					<button
-						type="button"
-						className="rounded-full border border-[#d8c4b1] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#3e2b24] transition hover:-translate-y-0.5"
-					>
-						Cart
-					</button>
-					<button
-						type="button"
-						className="rounded-full bg-[#1f1410] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#f5ece2] transition hover:-translate-y-0.5"
-					>
-						Profile
-					</button>
-				</div>
 
 				<button
 					type="button"
@@ -91,20 +88,6 @@ export default function Navbar() {
 									{item.label}
 								</Link>
 							))}
-						</div>
-						<div className="mt-4 flex gap-2">
-							<button
-								type="button"
-								className="flex-1 rounded-full border border-[#d8c4b1] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#3e2b24]"
-							>
-								Cart
-							</button>
-							<button
-								type="button"
-								className="flex-1 rounded-full bg-[#1f1410] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#f5ece2]"
-							>
-								Profile
-							</button>
 						</div>
 					</motion.div>
 				) : null}

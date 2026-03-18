@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
 		"http://127.0.0.1:3001",
 		...envOrigins,
 	],
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "images.unsplash.com",
+			},
+		],
+	},
 };
 
 export default nextConfig;

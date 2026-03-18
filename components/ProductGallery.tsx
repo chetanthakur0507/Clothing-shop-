@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const galleryItems = [
 	{
-		src: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=800&q=80",
+		src: "https://images.unsplash.com/photo-1646723774959-7ff2f39b252f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNsb3RoaW5nJTIwYmFnZ3klMjBsb2trfGVufDB8fDB8fHww",
 		label: "Textured Casual Wear",
 	},
 	{
@@ -19,7 +19,7 @@ const galleryItems = [
 		label: "Softline Evening Dress",
 	},
 	{
-		src: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80",
+		src: "https://images.unsplash.com/photo-1693930446116-3434cbc30e57?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 		label: "Urban Layer Set",
 	},
 	{
@@ -35,7 +35,7 @@ const galleryItems = [
 		label: "Weekend Denim Duo",
 	},
 	{
-		src: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80",
+		src: "https://plus.unsplash.com/premium_photo-1673977134363-c86a9d5dcafa?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGVuaW0lMjBqZWFuc3xlbnwwfHwwfHx8MA%3D%3D",
 		label: "Fluid Evening Cut",
 	},
 ];

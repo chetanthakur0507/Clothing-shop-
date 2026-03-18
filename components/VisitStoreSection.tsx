@@ -64,7 +64,7 @@ export default function VisitStoreSection() {
 						<ul className="mt-4 space-y-1 text-sm text-[#4a3a30]">
 							<li>🕙 Mon–Sat: 10:00 AM – 9:00 PM</li>
 							<li>🕙 Sunday: 11:00 AM – 7:00 PM</li>
-							<li>📞 +91 7820022516</li>
+							<li>📞 +91 8076210068</li>
 						</ul>
 						<div className="mt-6 flex flex-wrap gap-3">
 							<a

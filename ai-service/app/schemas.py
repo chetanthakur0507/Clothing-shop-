@@ -19,3 +19,4 @@ class RecommendationResponse(BaseModel):
     styleSuggestions: list[str]
     previewImageUrl: str
     nextStep: str
+    provider: Literal["python", "grok-fallback"] | None = None

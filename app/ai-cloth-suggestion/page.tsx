@@ -49,18 +49,6 @@ export default function AIClothSuggestionPage() {
 		return URL.createObjectURL(userPhoto);
 	}, [userPhoto]);
 
-	const architecture = useMemo(
-		() => [
-			"Frontend (Next.js): upload/select UI, recommendation rendering, preview image panels",
-			"API Gateway (Node/Next Route Handlers): validation, auth, request orchestration",
-			"AI Service (Python/FastAPI): FashionCLIP embeddings, outfit scoring, generation pipelines",
-			"Vector Search (FAISS): nearest fashion items by visual + text embedding similarity",
-			"Image Generation (Stable Diffusion / virtual try-on): outfit preview synthesis",
-			"No persistent DB: in-memory catalog/index for stateless recommendations",
-		],
-		[],
-	);
-
 	const stopCamera = () => {
 		const stream = videoRef.current?.srcObject as MediaStream | null;
 		if (stream) {
@@ -512,6 +500,11 @@ export default function AIClothSuggestionPage() {
 								<div className="rounded-2xl bg-[#f6e7d4] p-4 text-sm text-[#3d2a1f]">
 									<p className="font-semibold">{result.inputSummary}</p>
 									<p className="mt-1 text-xs text-[#664836]">{result.nextStep}</p>
+									{result.provider ? (
+										<p className="mt-2 inline-flex rounded-full bg-[#3d2a1f] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#ffe8cf]">
+											Provider: {result.provider}
+										</p>
+									) : null}
 								</div>
 
 								<div>
@@ -578,28 +571,6 @@ export default function AIClothSuggestionPage() {
 								Mode choose karke input do, fir AI recommendation output yahin show hoga.
 							</p>
 						)}
-					</div>
-				</div>
-			</section>
-
-			<section className="mx-auto w-full max-w-6xl px-4 pb-14 md:px-8">
-				<div className="rounded-3xl border border-[#e8d7c7] bg-[#fff9f2] p-6 shadow-[0_15px_30px_rgba(46,26,14,0.1)] md:p-8">
-					<p className="text-xs uppercase tracking-[0.24em] text-[#8e6344]">Architecture</p>
-					<h2 className="display-font mt-2 text-3xl text-[#241710] md:text-4xl">
-						System Design and API Plan
-					</h2>
-					<ul className="mt-4 grid gap-2 text-sm leading-7 text-[#4a3a30]">
-						{architecture.map((line) => (
-							<li key={line} className="rounded-xl bg-[#f7ebdc] px-4 py-2">
-								{line}
-							</li>
-						))}
-					</ul>
-					<div className="mt-5 rounded-2xl bg-[#f3e3cf] p-4 text-sm text-[#412d1f]">
-						<p className="font-semibold">API Endpoints (ready)</p>
-						<p className="mt-1">POST `/api/ai-fashion/item` with `{`"item"`}` JSON</p>
-						<p>POST `/api/ai-fashion/image` with `multipart/form-data` key `image`</p>
-						<p>POST `/api/ai-fashion/user-photo` with `multipart/form-data` key `photo`</p>
 					</div>
 				</div>
 			</section>
