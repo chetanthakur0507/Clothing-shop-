@@ -14,6 +14,7 @@ export async function GET() {
 	const controller = new AbortController();
 	const timeout = setTimeout(() => controller.abort(), HEALTH_TIMEOUT_MS);
 	const grokReady = isGrokConfigured();
+	const mockReady = true;
 
 	try {
 		const res = await fetch(`${AI_SERVICE_URL}/health`, {
@@ -23,12 +24,16 @@ export async function GET() {
 
 		const raw = (await res.json().catch(() => ({}))) as PythonHealth;
 		const pythonReady = Boolean(raw.ok && raw.embedding_mode === "clip");
-		const modelReady = pythonReady || grokReady;
-		const embeddingMode = pythonReady ? raw.embedding_mode ?? "clip" : grokReady ? "grok-fallback" : "offline";
+		const modelReady = pythonReady || grokReady || mockReady;
+		const embeddingMode = pythonReady
+			? raw.embedding_mode ?? "clip"
+			: grokReady
+				? "grok-fallback"
+				: "mock-fallback";
 		const error =
-			pythonReady || grokReady
+			pythonReady || grokReady || mockReady
 				? null
-				: raw.error ?? "No active AI provider. Start Python model or configure XAI_API_KEY.";
+				: raw.error ?? "No active AI provider.";
 
 		return NextResponse.json({
 			webApiOnline: true,
@@ -37,16 +42,18 @@ export async function GET() {
 			embeddingMode,
 			error,
 			grokFallbackReady: grokReady,
+			mockFallbackReady: mockReady,
 		});
 	} catch (error) {
 		const message = error instanceof Error ? error.message : "Health check failed";
 		return NextResponse.json({
 			webApiOnline: true,
 			aiServiceReachable: false,
-			modelReady: grokReady,
-			embeddingMode: grokReady ? "grok-fallback" : "offline",
-			error: grokReady ? null : message,
+			modelReady: grokReady || mockReady,
+			embeddingMode: grokReady ? "grok-fallback" : "mock-fallback",
+			error: grokReady || mockReady ? null : message,
 			grokFallbackReady: grokReady,
+			mockFallbackReady: mockReady,
 		});
 	} finally {
 		clearTimeout(timeout);
